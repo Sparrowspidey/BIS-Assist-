@@ -2,6 +2,7 @@
 .env
 .env.local
 *.env
+uv.lock
 
 # --- Data & model artifacts (never commit these) ---
 data/
