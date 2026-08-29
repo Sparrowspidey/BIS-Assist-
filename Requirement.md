@@ -113,8 +113,8 @@ Ollama (local LLM) ── FAISS index ── Structured datasets (labs, product-
 | **1. Data Acquisition & Corpus Building** | Crawl and clean BIS standards, scheme, hallmarking, and consumer pages; produce clean text corpus for indexing | **Vivek** |
 | **2. Structured Data (Labs + Product-Standard Mapping)** | Build/curate testing lab directory and product-category → IS standard mapping used for FR2 and FR7 | **Vivek** |
 | **3. Embeddings & Retrieval (FAISS)** | Chunking strategy, embedding generation, FAISS index build/update pipeline | **** |
-| **4. Backend & Intent Routing** | FastAPI endpoints, intent router (RAG vs. structured lookup), multilingual handling, response formatting with citations | **** |
-| **5. Frontend (React UI)** | Chat interface, language selector, source-citation display, lab/standard result views | **Joyal** |
+| **4. Backend & Intent Routing** | FastAPI endpoints, intent router (RAG vs. structured lookup), multilingual handling, response formatting with citations | **Anil kumar & Joel Stephan** |
+| **5. Frontend (React UI)** | Chat interface, language selector, source-citation display, lab/standard result views | **Joyal & Mahima** |
 | **6. Documentation, Testing & Presentation** | Problem understanding write-up, PPT, demo script, QA/testing across modules, integration coordination | **** |
 
 
