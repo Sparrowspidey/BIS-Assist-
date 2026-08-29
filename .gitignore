@@ -1,0 +1,53 @@
+# --- Secrets / environment ---
+.env
+.env.local
+*.env
+
+# --- Data & model artifacts (never commit these) ---
+data/
+vectorstore_data/
+security/
+*.index
+*.faiss
+*.pkl
+*.pt
+*.bin
+*.gguf
+
+# --- Python ---
+# NOTE: uv.lock is intentionally NOT ignored — commit it so everyone
+# resolves the exact same dependency versions.
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# --- Node / React / Vite ---
+node_modules/
+frontend/dist/
+frontend/build/
+.vite/
+*.local
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Jupyter (if used for experimentation) ---
+.ipynb_checkpoints/
