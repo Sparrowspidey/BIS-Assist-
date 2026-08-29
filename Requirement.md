@@ -120,21 +120,3 @@ Ollama (local LLM) ── FAISS index ── Structured datasets (labs, product-
 
 
 ---
-
-## 9. Milestones (suggested)
-
-| Phase | Deliverable |
-|---|---|
-| Week 1–2 | Problem understanding write-up, architecture finalized, data acquisition started |
-| Week 3–4 | Corpus + structured datasets ready, FAISS index v1, basic FastAPI RAG endpoint working |
-| Week 5–6 | Intent router, multilingual support, frontend chat UI integrated end-to-end |
-| Week 7 | Testing, source-citation polish, demo rehearsal |
-| Week 8 | Final PPT, video demo, submission |
-
----
-
-## 10. Open Questions
-
-- Full text of paid IS standards — is summary/scope-level data sufficient, or is full-text access needed?
-- Does BIS publish a structured/downloadable testing labs directory, or does this need manual curation?
-- Which languages beyond Hindi/English are in scope (stretch goal vs. requirement)?
