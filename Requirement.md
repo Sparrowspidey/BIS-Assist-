@@ -106,8 +106,6 @@ Ollama (local LLM) ── FAISS index ── Structured datasets (labs, product-
 
 ## 8. Module Breakdown & Team Assignment
 
-*(Draft split — adjust based on individual strengths/interests.)*
-
 | Module | Scope | Assigned To |
 |---|---|---|
 | **1. Data Acquisition & Corpus Building** | Crawl and clean BIS standards, scheme, hallmarking, and consumer pages; produce clean text corpus for indexing | **Vivek** |
