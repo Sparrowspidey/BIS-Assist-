@@ -127,7 +127,7 @@ Standard_AI
 * Create a folder with a name of your choice, open cmd in the folder, and paste this command:
 
 ```bash
-git clone https://github.com/Sparrowspidey/Standard_AI.git
+git clone [https://github.com/Sparrowspidey/Standard_AI.git](https://github.com/Sparrowspidey/BIS-Assist-)
 ```
 
 ---
