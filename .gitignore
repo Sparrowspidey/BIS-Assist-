@@ -16,8 +16,6 @@ security/
 *.gguf
 
 # --- Python ---
-# NOTE: uv.lock is intentionally NOT ignored — commit it so everyone
-# resolves the exact same dependency versions.
 __pycache__/
 *.py[cod]
 *$py.class
