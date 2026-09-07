@@ -5,7 +5,7 @@
 uv.lock
 
 # --- Data & model artifacts (never commit these) ---
-data/
+data/raw
 vectorstore_data/
 security/
 *.index
