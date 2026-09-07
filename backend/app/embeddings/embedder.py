@@ -23,6 +23,13 @@ class QwenEmbedder:
 
     def __init__(self) -> None:
         self.model = SentenceTransformer(self.MODEL_NAME)
+        actual_dimension = self.model.get_embedding_dimension()
+        if actual_dimension != self.EMBEDDING_DIMENSION:
+            raise RuntimeError(
+            f"Unexpected embedding dimension: "
+            f"expected {self.EMBEDDING_DIMENSION}, "
+            f"got {actual_dimension}"
+        )
 
     def embed_documents(
         self,
