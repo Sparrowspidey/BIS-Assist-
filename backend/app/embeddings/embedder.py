@@ -4,7 +4,10 @@ from typing import Sequence
 
 import numpy as np
 from sentence_transformers import SentenceTransformer
-
+from ..config.Config import (
+    EMBEDDING_MODEL,
+    EMBEDDING_DIMENSION as CONFIG_EMBEDDING_DIMENSION,
+)
 
 class QwenEmbedder:
     """
@@ -18,18 +21,20 @@ class QwenEmbedder:
     Query embeddings use Qwen's built-in "query" prompt.
     """
 
-    MODEL_NAME = "Qwen/Qwen3-Embedding-0.6B"
-    EMBEDDING_DIMENSION = 1024
+    MODEL_NAME = EMBEDDING_MODEL
+    EMBEDDING_DIMENSION = CONFIG_EMBEDDING_DIMENSION
 
     def __init__(self) -> None:
         self.model = SentenceTransformer(self.MODEL_NAME)
+
         actual_dimension = self.model.get_embedding_dimension()
+
         if actual_dimension != self.EMBEDDING_DIMENSION:
             raise RuntimeError(
-            f"Unexpected embedding dimension: "
-            f"expected {self.EMBEDDING_DIMENSION}, "
-            f"got {actual_dimension}"
-        )
+                f"Unexpected embedding dimension: "
+                f"expected {self.EMBEDDING_DIMENSION}, "
+                f"got {actual_dimension}"
+            )
 
     def embed_documents(
         self,
@@ -47,7 +52,10 @@ class QwenEmbedder:
             NumPy array with shape (number_of_documents, 1024).
         """
         if not documents:
-            return np.empty((0, self.EMBEDDING_DIMENSION), dtype=np.float32)
+            return np.empty(
+                (0, self.EMBEDDING_DIMENSION),
+                dtype=np.float32,
+            )
 
         embeddings = self.model.encode(
             list(documents),
