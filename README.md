@@ -157,7 +157,7 @@ Activate the environment:
 You should see:
 
 ```
-(Standard-AI)
+(BIS_Assist)
 ```
 
 ---
