@@ -8,7 +8,6 @@ Import from this file anywhere in the project — never hardcode paths.
 """
 
 from pathlib import Path
-
 # ── Project root (4 levels up from backend/app/config/config.py) ──────────
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
@@ -27,6 +26,7 @@ RAW_DIR        = DATA_DIR / "raw"
 WEBSITE_DIR    = RAW_DIR  / "website"   # crawled HTML pages
 PDF_DIR        = RAW_DIR  / "pdf"       # PDFs downloaded while crawling
 PROCESSED_DIR  = DATA_DIR / "processed"
+EMBEDDINGS_DIR = DATA_DIR / "embeddings"
 
 # Per-category processed chunk files (produced by app/ingestion/pipeline.py)
 STANDARDS_CHUNKS_PATH        = PROCESSED_DIR / "standards.jsonl"
@@ -44,7 +44,10 @@ CHUNKS_PATH      = VECTORSTORE_DIR / "chunks_for_retrieval.pkl"
 CHUNKS_RAW_PATH  = VECTORSTORE_DIR / "chunks_with_metadata.pkl"
 
 # ── Embedding model ────────────────────────────────────────────────────────
-EMBEDDING_MODEL = "all-MiniLM-L6-v2"
+# Embedding model (Qwen3)
+# ── Embedding model ────────────────────────────────────────────────────────
+EMBEDDING_MODEL = "Qwen/Qwen3-Embedding-0.6B"
+EMBEDDING_DIMENSION = 1024
 
 # ── LLM (Ollama) ───────────────────────────────────────────────────────────
 LLM_PROVIDER   = "ollama"
