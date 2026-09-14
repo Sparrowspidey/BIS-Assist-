@@ -1,6 +1,7 @@
-function FeatureCard({ icon, title, description }) {
+function FeatureCard({ icon, title, description, path }) {
   return (
     <div className="feature-card">
+
       <div className="feature-icon">
         {icon}
       </div>
@@ -9,9 +10,13 @@ function FeatureCard({ icon, title, description }) {
 
       <p>{description}</p>
 
-      <button className="feature-link">
+      <a
+        href={path}
+        className="feature-link"
+      >
         Explore →
-      </button>
+      </a>
+
     </div>
   )
 }
