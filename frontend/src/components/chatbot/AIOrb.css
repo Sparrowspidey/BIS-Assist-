@@ -1,0 +1,291 @@
+/* ==========================================================================
+   AI ORB - Glossy 3D Translucent CSS Sphere
+   Visual centerpiece for BIS SmartStandards
+   ========================================================================== */
+
+.ai-orb-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Size Variants */
+.ai-orb-lg {
+  width: 140px;
+  height: 140px;
+}
+
+.ai-orb-md {
+  width: 84px;
+  height: 84px;
+}
+
+.ai-orb-sm {
+  width: 44px;
+  height: 44px;
+}
+
+.ai-orb-xs {
+  width: 28px;
+  height: 28px;
+}
+
+/* Ambient Diffuse Outer Glow */
+.ai-orb-ambient-glow {
+  position: absolute;
+  inset: -15%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.35) 0%,
+    rgba(56, 189, 248, 0.32) 40%,
+    rgba(244, 114, 182, 0.28) 65%,
+    transparent 80%
+  );
+  filter: blur(24px);
+  opacity: 0.85;
+  animation: orbGlowPulse 5s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+/* 3D Glass Sphere Body */
+.ai-orb-sphere {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow:
+    0 12px 32px -4px rgba(15, 76, 129, 0.22),
+    0 4px 16px -2px rgba(168, 85, 247, 0.25),
+    inset 0 -8px 18px rgba(15, 76, 129, 0.3),
+    inset 0 4px 12px rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  z-index: 2;
+  transform: translateZ(0);
+}
+
+.ai-orb-floating {
+  animation: orbFloat 6s ease-in-out infinite;
+}
+
+/* Internal Liquid Core Gradient */
+.ai-orb-core {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 40% 35%,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(224, 242, 254, 0.9) 15%,
+    rgba(192, 132, 252, 0.8) 45%,
+    rgba(244, 114, 182, 0.75) 70%,
+    rgba(56, 189, 248, 0.85) 100%
+  );
+  filter: saturate(1.2);
+}
+
+/* Swirling Gradient Vortex 1 (Pink / Lavender) */
+.ai-orb-vortex-1 {
+  position: absolute;
+  width: 130%;
+  height: 130%;
+  top: -15%;
+  left: -15%;
+  border-radius: 42% 58% 65% 35% / 45% 42% 58% 55%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(244, 114, 182, 0.65),
+    rgba(168, 85, 247, 0.5) 60%,
+    transparent 80%
+  );
+  filter: blur(8px);
+  animation: orbRotate 14s linear infinite;
+  mix-blend-mode: screen;
+}
+
+/* Swirling Gradient Vortex 2 (Cyan / Sky Blue) */
+.ai-orb-vortex-2 {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  bottom: -10%;
+  right: -10%;
+  border-radius: 58% 42% 38% 62% / 52% 60% 40% 48%;
+  background: radial-gradient(
+    circle at 70% 70%,
+    rgba(56, 189, 248, 0.7),
+    rgba(129, 140, 248, 0.5) 55%,
+    transparent 75%
+  );
+  filter: blur(10px);
+  animation: orbRotateReverse 18s linear infinite;
+  mix-blend-mode: overlay;
+}
+
+/* Swirling Gradient Vortex 3 (Ambient Lavender Core) */
+.ai-orb-vortex-3 {
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    rgba(168, 85, 247, 0.5),
+    rgba(56, 189, 248, 0.5),
+    rgba(244, 114, 182, 0.5),
+    rgba(129, 140, 248, 0.5),
+    rgba(168, 85, 247, 0.5)
+  );
+  filter: blur(12px);
+  animation: orbRotate 22s linear infinite;
+  opacity: 0.7;
+}
+
+/* Inner Rim Shadow for 3D Convex Curvature */
+.ai-orb-inner-shadow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 20px rgba(15, 76, 129, 0.35),
+    inset 0 -12px 24px rgba(14, 116, 144, 0.3),
+    inset 0 6px 14px rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+}
+
+/* Specular Primary Highlight (Top-left Glass Sheen) */
+.ai-orb-specular-primary {
+  position: absolute;
+  top: 10%;
+  left: 14%;
+  width: 48%;
+  height: 32%;
+  border-radius: 50%;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+  transform: rotate(-32deg);
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+/* Specular Secondary Highlight (Bottom-right subtle bounce reflection) */
+.ai-orb-specular-secondary {
+  position: absolute;
+  bottom: 12%;
+  right: 14%;
+  width: 32%;
+  height: 18%;
+  border-radius: 50%;
+  background: linear-gradient(
+    325deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    transparent 80%
+  );
+  transform: rotate(-32deg);
+  filter: blur(1.5px);
+  pointer-events: none;
+}
+
+/* Center Intelligence Sparkle */
+.ai-orb-center-mark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.ai-orb-sparkle {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 24px;
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, 0.9),
+    0 0 24px rgba(168, 85, 247, 0.75);
+  animation: sparklePulse 3.5s ease-in-out infinite;
+}
+
+.ai-orb-md .ai-orb-sparkle {
+  font-size: 16px;
+}
+
+.ai-orb-sm .ai-orb-sparkle {
+  font-size: 10px;
+}
+
+.ai-orb-xs .ai-orb-sparkle {
+  font-size: 8px;
+}
+
+/* Animations */
+@keyframes orbFloat {
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.015);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@keyframes orbGlowPulse {
+  0% {
+    opacity: 0.65;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 0.9;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes orbRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbRotateReverse {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes sparklePulse {
+  0%, 100% {
+    opacity: 0.85;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .ai-orb-floating,
+  .ai-orb-vortex-1,
+  .ai-orb-vortex-2,
+  .ai-orb-vortex-3,
+  .ai-orb-ambient-glow,
+  .ai-orb-sparkle {
+    animation: none !important;
+  }
+}
