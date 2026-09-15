@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { askBIS } from "../services/api";
 import { useParams, useNavigate } from 'react-router-dom';
 import { DOMAINS } from '../data/domainConfig';
 import ChatSidebar from '../components/chatbot/ChatSidebar';
@@ -20,84 +21,136 @@ export default function ChatPage({ defaultDomain = 'standards' }) {
   const [isLoading, setIsLoading] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [contextOpen, setContextOpen] = useState(true);
-  const timeoutRef = React.useRef(null);
+  const [sources, setSources] = useState([]);
+  const [labs, setLabs] = useState([]);
+ 
 
   // Clear messages when switching domains so each has its tailored welcome state
-  useEffect(() => {
-    setMessages([]);
-    setInput('');
-    setIsLoading(false);
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-  }, [activeDomainKey]);
+ useEffect(() => {
+  setMessages([]);
+  setInput('');
+  setIsLoading(false);
+  setSources([]);
+  setLabs([]);
+}, [activeDomainKey]);
 
-  // Clean up timeouts on unmount
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
+  
 
-  const handleSendMessage = (textToSend = input) => {
-    const trimmed = textToSend.trim();
-    if (!trimmed || isLoading) return;
+  const handleSendMessage = async (textToSend = input) => {
+  const trimmed = textToSend.trim();
+  if (!trimmed || isLoading) return;
 
-    // 1. Add user message
-    const userMsg = {
-      id: `user-${Date.now()}`,
-      sender: 'user',
-      text: trimmed,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
-
-    setMessages((prev) => [...prev, userMsg]);
-    setInput('');
-    setIsLoading(true);
-
-    // 2. Select realistic response from domainConfig
-    const domainResponses = domainConfig.defaultResponses || {};
-    const matchedResponse = domainResponses[trimmed] || domainResponses.fallback;
-
-    // 3. Realistic typing simulation delay (750ms)
-    timeoutRef.current = setTimeout(() => {
-      const aiMsg = {
-        id: `ai-${Date.now()}`,
-        sender: 'ai',
-        text: matchedResponse?.summary || 'Standard analysis complete.',
-        data: matchedResponse,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
-
-      setMessages((prev) => [...prev, aiMsg]);
-      setIsLoading(false);
-    }, 750);
+  // 1. Add user message
+  const userMsg = {
+    id: `user-${Date.now()}`,
+    sender: 'user',
+    text: trimmed,
+    timestamp: new Date().toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit'
+    })
   };
+
+  setMessages((prev) => [...prev, userMsg]);
+  setInput('');
+  setIsLoading(true);
+
+  try {
+    // 2. Call the real BIS Assist backend
+    const result = await askBIS(trimmed);
+    
+    setSources(result.sources || []);
+    setLabs(result.labs || []);
+
+    // 3. Add real backend response
+    const aiMsg = {
+      id: `ai-${Date.now()}`,
+      sender: 'ai',
+      text: result.response || 'No response received from the backend.',
+      data: result,
+      sources: result.sources || [],
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    };
+
+    setMessages((prev) => [...prev, aiMsg]);
+  } catch (error) {
+    console.error('BIS Assist API error:', error);
+
+    const errorMsg = {
+      id: `ai-error-${Date.now()}`,
+      sender: 'ai',
+      text: 'Sorry, I could not connect to the BIS Assist backend. Please make sure the backend server is running.',
+      data: null,
+      sources: [],
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    };
+
+    setMessages((prev) => [...prev, errorMsg]);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const handleSelectSuggestion = (suggestion) => {
     handleSendMessage(suggestion.query);
   };
 
   const handleStopGenerating = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
+  setIsLoading(false);
+};
+
+ const handleNewChat = () => {
+  handleStopGenerating();
+  setMessages([]);
+  setInput('');
+  setSources([]);
+};
+
+  const handleRegenerate = async (lastAiMessage) => {
+  if (isLoading || !lastAiMessage) return;
+
+  setIsLoading(true);
+
+  try {
+    const result = await askBIS(lastAiMessage.text);
+
+    const regeneratedMessage = {
+      id: `ai-${Date.now()}`,
+      sender: 'ai',
+      text: result.response || 'No response received from the backend.',
+      data: result,
+      sources: result.sources || [],
+      timestamp: new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    };
+
+    setMessages((prev) => {
+      const index = prev.findIndex(
+        (message) => message.id === lastAiMessage.id
+      );
+
+      if (index === -1) {
+        return [...prev, regeneratedMessage];
+      }
+
+      const updated = [...prev];
+      updated[index] = regeneratedMessage;
+      return updated;
+    });
+  } catch (error) {
+    console.error('BIS Assist regenerate error:', error);
+  } finally {
     setIsLoading(false);
-  };
-
-  const handleNewChat = () => {
-    handleStopGenerating();
-    setMessages([]);
-    setInput('');
-  };
-
-  const handleRegenerate = (lastAiMessage) => {
-    if (isLoading) return;
-    setIsLoading(true);
-    timeoutRef.current = setTimeout(() => {
-      setIsLoading(false);
-    }, 600);
-  };
-
+  }
+};
   const handleSelectRecentChat = (chat) => {
     handleNewChat();
     // Simulate query from recent chat
@@ -141,11 +194,13 @@ export default function ChatPage({ defaultDomain = 'standards' }) {
           />
 
           {/* Right Context Panel */}
-          <ContextPanel
-            domainConfig={domainConfig}
-            isOpen={contextOpen}
-            onClose={() => setContextOpen(false)}
-          />
+         <ContextPanel
+  domainConfig={domainConfig}
+  isOpen={contextOpen}
+  onClose={() => setContextOpen(false)}
+  sources={sources}
+  labs={labs}
+/>
         </div>
       </main>
     </div>
