@@ -1,105 +1,85 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Sparkles, Globe, Shield, ArrowRight } from 'lucide-react';
 
-function Navbar() {
-  const [selectedLanguage, setSelectedLanguage] = useState('EN')
-  const [isOpen, setIsOpen] = useState(false)
-
-  const languages = [
-    { name: 'English', code: 'EN' },
-    { name: 'हिन्दी', code: 'HI' },
-    { name: 'తెలుగు', code: 'TE' },
-    { name: 'ಕನ್ನಡ', code: 'KN' },
-    { name: 'தமிழ்', code: 'TA' },
-    { name: 'മലയാളം', code: 'ML' },
-  ]
-
-  const handleLanguageChange = (language) => {
-    setSelectedLanguage(language.code)
-    setIsOpen(false)
-  }
+export default function Navbar() {
+  const [langMenu, setLangMenu] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
-
         {/* Logo */}
-        <a href="/" className="logo">
-          <div className="logo-mark">BIS</div>
-
+        <Link to="/" className="logo" title="BIS SmartStandards Home">
+          <div className="logo-mark">
+            BIS
+          </div>
           <div className="logo-text">
             <span>BIS</span>
             <small>SmartStandards</small>
           </div>
-        </a>
+        </Link>
 
-        {/* Navigation */}
+        {/* Navigation links */}
         <div className="nav-links">
-          <a href="/">Home</a>
-          <a href="/assistant">AI Assistant</a>
-          <a href="/standards">Standards</a>
-          <a href="/certification">Certification</a>
-          <a href="/laboratories">Laboratories</a>
-          <a href="/multilingual">Multilingual</a>
+          <Link to="/chat/standards" className="nav-link-item">
+            <Sparkles size={14} className="nav-icon-sparkle" />
+            <span>AI Workspace</span>
+          </Link>
+          <a href="#standards" className="nav-link-item">
+            Standards
+          </a>
+          <Link to="/chat/certification" className="nav-link-item">
+            Certification
+          </Link>
+          <Link to="/chat/laboratory" className="nav-link-item">
+            Laboratories
+          </Link>
+          <Link to="/chat/hallmarking" className="nav-link-item">
+            Hallmarking
+          </Link>
         </div>
 
-        {/* Actions */}
+        {/* Right side actions */}
         <div className="nav-actions">
-
-          {/* Language Dropdown */}
-          <div className="language-dropdown">
-
+          <div className="lang-dropdown-wrapper">
             <button
+              type="button"
               className="language-button"
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setLangMenu(!langMenu)}
+              aria-label="Select Language"
             >
-              {selectedLanguage}
-              <span>{isOpen ? '▴' : '▾'}</span>
+              <Globe size={14} />
+              <span>EN ▾</span>
             </button>
-
-            {isOpen && (
-              <div className="language-menu">
-                {languages.map((language) => (
-                  <button
-                    key={language.code}
-                    className={
-                      selectedLanguage === language.code
-                        ? 'language-option active'
-                        : 'language-option'
-                    }
-                    onClick={() => handleLanguageChange(language)}
-                  >
-                    <span>{language.name}</span>
-                    <small>{language.code}</small>
-                  </button>
-                ))}
+            {langMenu && (
+              <div className="lang-menu-popover">
+                <button type="button" onClick={() => { setLangMenu(false); navigate('/chat/multilingual'); }}>English</button>
+                <button type="button" onClick={() => { setLangMenu(false); navigate('/chat/multilingual'); }}>हिन्दी (Hindi)</button>
+                <button type="button" onClick={() => { setLangMenu(false); navigate('/chat/multilingual'); }}>தமிழ் (Tamil)</button>
+                <button type="button" onClick={() => { setLangMenu(false); navigate('/chat/multilingual'); }}>More Languages →</button>
               </div>
             )}
-
           </div>
 
           <button
+            type="button"
             className="login-button"
-            onClick={() => {
-              window.location.href = '/login'
-            }}
+            onClick={() => navigate('/chat/standards')}
           >
-            Login
+            Sign In
           </button>
 
           <button
+            type="button"
             className="nav-cta"
-            onClick={() => {
-              window.location.href = '/assistant'
-            }}
+            onClick={() => navigate('/chat/standards')}
           >
-            Get Started →
+            <span>Launch AI</span>
+            <ArrowRight size={14} />
           </button>
-
         </div>
-
       </div>
     </nav>
-  )
+  );
 }
-
-export default Navbar
