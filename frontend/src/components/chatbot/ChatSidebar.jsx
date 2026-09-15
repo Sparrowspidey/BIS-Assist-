@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Plus,
@@ -183,7 +183,7 @@ export default function ChatSidebar({
         <div className="sidebar-footer">
           <Link to="/" className="sidebar-footer-link" title="Return to Landing Page">
             <Home size={17} />
-            {!collapsed && <span>Landing Page</span>}
+            {!collapsed && <span>Home</span>}
           </Link>
           <button
             type="button"

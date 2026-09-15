@@ -1,8 +1,8 @@
-import React from 'react';
+
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Features from '../components/Features';
-import Assistant from '../components/Assistant';
+
 import { Link } from 'react-router-dom';
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
       <main>
         <Hero />
         <Features />
-        <Assistant />
+        
       </main>
 
       {/* Landing Footer */}
