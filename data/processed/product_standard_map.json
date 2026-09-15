@@ -1,0 +1,117 @@
+[
+  {
+    "category": "pressure_cooker",
+    "display_name": "Pressure Cooker",
+    "keywords": ["pressure cooker", "cooker", "pressure pot", "cooking pot"],
+    "standards": [
+      {
+        "is_number": "IS 2347:2017",
+        "title": "Domestic Pressure Cookers — Specification",
+        "scheme": "Product Certification (ISI Mark)",
+        "mandatory": true
+      },
+      {
+        "is_number": "IS 17870:2022",
+        "title": "Commercial Pressure Cookers — Specification",
+        "scheme": "Product Certification (ISI Mark)",
+        "mandatory": true
+      }
+    ]
+  },
+  {
+    "category": "led_lighting",
+    "display_name": "LED Bulbs, Modules & Drivers",
+    "keywords": ["led bulb", "led light", "led lamp", "led module", "led driver", "led luminaire", "led"],
+    "standards": [
+      {
+        "is_number": "IS 16102",
+        "title": "Self-Ballasted LED Lamps for General Lighting Services",
+        "scheme": "Compulsory Registration Scheme (CRS)",
+        "mandatory": true
+      },
+      {
+        "is_number": "IS 16103",
+        "title": "LED Modules for General Lighting — Safety Requirements",
+        "scheme": "Compulsory Registration Scheme (CRS)",
+        "mandatory": true
+      },
+      {
+        "is_number": "IS 15885",
+        "title": "LED Driver — Performance Requirements",
+        "scheme": "Compulsory Registration Scheme (CRS)",
+        "mandatory": true
+      }
+    ]
+  },
+  {
+    "category": "helmet",
+    "display_name": "Two-Wheeler Protective Helmet",
+    "keywords": ["helmet", "motorcycle helmet", "scooter helmet", "riding helmet", "two-wheeler helmet"],
+    "standards": [
+      {
+        "is_number": "IS 4151:2015",
+        "title": "Protective Helmet for Two Wheeler Riders — Specification (Fourth Revision)",
+        "scheme": "Product Certification (ISI Mark)",
+        "mandatory": true
+      }
+    ]
+  },
+  {
+    "category": "toys",
+    "display_name": "Toys (for children under 14)",
+    "keywords": ["toy", "toys", "children's toy", "kids toy", "play equipment"],
+    "standards": [
+      {
+        "is_number": "IS 9873 (Part 1):2025",
+        "title": "Safety of Toys — Mechanical and Physical Properties (replaces 2019 edition; 2019 valid until 22 March 2027)",
+        "scheme": "Product Certification (ISI Mark)",
+        "mandatory": true
+      },
+      {
+        "is_number": "IS 9873 (Part 3)",
+        "title": "Safety of Toys — Migration of Certain Elements",
+        "scheme": "Product Certification (ISI Mark)",
+        "mandatory": true
+      }
+    ]
+  },
+  {
+    "category": "drinking_water",
+    "display_name": "Drinking Water (potable, supplied by local authority)",
+    "keywords": ["drinking water", "potable water", "tap water", "municipal water"],
+    "standards": [
+      {
+        "is_number": "IS 10500:2012",
+        "title": "Drinking Water — Specification (Second Revision)",
+        "scheme": "Quality Specification",
+        "mandatory": false
+      }
+    ]
+  },
+  {
+    "category": "packaged_drinking_water",
+    "display_name": "Packaged Drinking Water (bottled/pouch, not mineral water)",
+    "keywords": ["packaged drinking water", "bottled water", "mineral water bottle", "water pouch", "packaged water"],
+    "standards": [
+      {
+        "is_number": "IS 14543:2016",
+        "title": "Packaged Drinking Water (Other than Packaged Natural Mineral Water) — Specification",
+        "scheme": "Product Certification (ISI Mark)",
+        "mandatory": true
+      }
+    ]
+  },
+  {
+    "category": "cement",
+    "display_name": "Ordinary Portland Cement (OPC)",
+    "keywords": ["cement", "opc", "portland cement", "cement bag"],
+    "standards": [
+      {
+        "is_number": "IS 269:2015",
+        "title": "Ordinary Portland Cement — Specification (Sixth Revision)",
+        "scheme": "Product Certification (ISI Mark)",
+        "mandatory": true
+      }
+    ]
+  }
+]
