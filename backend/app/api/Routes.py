@@ -41,18 +41,48 @@ async def ask_query(request: QueryRequest) -> QueryResponse:
     middleware — not added as more logic in this function.
     """
     try:
+        sources = []
+        labs = []
+        answer = "Temporary response: unable to determine the intent."
         intent = detect_intent(request.query)
 
         if intent == Intent.RAG_QUERY:
             result = answer_from_documents(request.query)
-            answer, sources = result.answer, result.sources
+            answer = result.answer
+            sources = [
+                {
+                    "standard_id": source.get("standard_id"),
+                    "clause": source.get("clause"),
+                    "document_title": source.get("document_title") or source.get("title"),
+                    "snippet": source.get("snippet") or source.get("text"),
+                    "url": source.get("url") or source.get("source_url"),
+                }
+                for source in result.sources
+            ]
         elif intent == Intent.LABS_LOOKUP:
             from app.labs.Lookup import search_labs
+
             matches = search_labs(request.query)
+
             if matches:
-                lines = [f"{l['name']} ({l['state']}, OSL {l['osl_code']})" for l in matches]
+                labs = [
+                    {
+                        "name": lab["name"],
+                        "state": lab["state"],
+                        "osl_code": lab["osl_code"],
+                        "source_url": lab.get("source_url", ""),
+                    }
+                    for lab in matches
+                ]
+
+                lines = [
+                    f"{lab['name']} ({lab['state']}, OSL {lab['osl_code']})"
+                    for lab in matches
+                ]
+
                 answer = "Here are some matching labs:\n" + "\n".join(lines)
             else:
+                labs = []
                 answer = "I couldn't find a matching lab for that location."
         elif intent == Intent.RECOMMENDATION:
             from app.recommender.Matcher import match_product
@@ -62,10 +92,13 @@ async def ask_query(request: QueryRequest) -> QueryResponse:
             answer = "Temporary response: translate-text intent detected."
         elif intent == Intent.GENERAL_CHAT:
             answer = handle_general_chat(request.query)
-        else:
-            answer = "Temporary response: unable to determine the intent."
 
-        return QueryResponse(query=request.query, response=answer, sources=[])
+        return QueryResponse(
+            query=request.query,
+            response=answer,
+            sources=sources,
+            labs=labs,
+        )
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing query: {e}")

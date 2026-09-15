@@ -14,9 +14,18 @@ import {
   X
 } from 'lucide-react';
 
-export default function ContextPanel({ domainConfig, onClose, isOpen }) {
+export default function ContextPanel({
+  domainConfig,
+  onClose,
+  isOpen,
+  sources = [],
+  labs = []
+}) {
   const [selectedLang, setSelectedLang] = useState('en');
   const context = domainConfig.contextPanel || {};
+  const liveSources = Array.isArray(sources) ? sources : [];
+  const liveLabs = Array.isArray(labs) ? labs : [];
+ 
 
   if (!isOpen) return null;
 
@@ -49,114 +58,316 @@ export default function ContextPanel({ domainConfig, onClose, isOpen }) {
           </div>
         )}
 
-        {/* 1. STANDARDS CONTEXT */}
-        {context.type === 'standards' && context.standards && (
-          <div className="context-section-block">
-            <span className="section-block-title">IDENTIFIED STANDARDS</span>
-            <div className="standards-cards-stack">
-              {context.standards.map((std, i) => (
-                <div key={i} className="std-context-card">
-                  <div className="std-card-top">
-                    <strong className="std-card-code">{std.code}</strong>
-                    <span className="std-relevance-pill">{std.relevance}% Match</span>
-                  </div>
-                  <p className="std-card-title">{std.title}</p>
-                  <div className="std-card-meta">
-                    <span className="std-meta-status">{std.status}</span>
-                    <span className="std-meta-clause">{std.clause}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+       {/* 1. LIVE STANDARDS CONTEXT */}
+{context.type === 'standards' && (
+  <div className="context-section-block">
+    <span className="section-block-title">
+      {liveSources.length > 0
+        ? 'RETRIEVED SOURCES'
+        : 'NO SOURCES RETRIEVED'}
+    </span>
 
-        {/* 2. CERTIFICATION CONTEXT */}
-        {context.type === 'certification' && context.steps && (
-          <div className="context-section-block">
-            <span className="section-block-title">CERTIFICATION PROGRESSION</span>
-            <div className="certification-steps-timeline">
-              {context.steps.map((step, idx) => (
-                <div key={idx} className={`timeline-step-item ${step.status}`}>
-                  <div className="step-number-circle">
-                    {step.status === 'completed' ? (
-                      <CheckCircle2 size={13} />
-                    ) : (
-                      <span>{step.num}</span>
-                    )}
-                  </div>
-                  <div className="step-content">
-                    <div className="step-title-row">
-                      <strong className="step-title">{step.title}</strong>
-                      <span className={`step-badge ${step.status}`}>{step.status}</span>
-                    </div>
-                    <p className="step-description">{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+    {liveSources.length > 0 ? (
+      <div className="standards-cards-stack">
+        {liveSources.map((source, i) => {
+          const standardCode =
+            source.standard_id ||
+            source.code ||
+            source.standard ||
+            'BIS Source';
 
-        {/* 3. LABORATORY CONTEXT */}
-        {context.type === 'laboratory' && context.labs && (
-          <div className="context-section-block">
-            <span className="section-block-title">ACCREDITED TEST FACILITIES</span>
-            <div className="labs-cards-stack">
-              {context.labs.map((lab, idx) => (
-                <div key={idx} className="lab-context-card">
-                  <div className="lab-card-header">
-                    <strong className="lab-name">{lab.name}</strong>
-                    <span className="lab-badge">{lab.badge}</span>
-                  </div>
-                  <p className="lab-location">{lab.location}</p>
-                  <div className="lab-scope-box">
-                    <span className="lab-scope-label">Capability:</span>
-                    <span className="lab-scope-text">{lab.scope}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+          const title =
+            source.document_title ||
+            source.title ||
+            'BIS Standard Document';
 
-        {/* 4. HALLMARKING CONTEXT */}
-        {context.type === 'hallmarking' && (
-          <div className="context-section-block">
-            <span className="section-block-title">PURITY & FINENESS STANDARDS</span>
-            <div className="purity-table-card">
-              <div className="purity-table-header">
-                <span>Carat</span>
-                <span>Fineness</span>
-                <span>Application</span>
+          const clause =
+            source.clause ||
+            '';
+
+          const snippet =
+            source.snippet ||
+            source.text ||
+            '';
+
+          return (
+            <div key={i} className="std-context-card">
+              <div className="std-card-top">
+                <strong className="std-card-code">
+                  {standardCode}
+                </strong>
               </div>
-              {context.purityList?.map((p, idx) => (
-                <div key={idx} className="purity-table-row">
-                  <strong className="purity-carat">{p.carat}</strong>
-                  <span className="purity-fineness">{p.fineness}</span>
-                  <span className="purity-desc">{p.desc}</span>
-                </div>
-              ))}
+
+              <p className="std-card-title">
+                {title}
+              </p>
+
+              {snippet && (
+                <p className="std-card-snippet">
+                  {snippet}
+                </p>
+              )}
+
+              <div className="std-card-meta">
+                {clause && (
+                  <span className="std-meta-clause">
+                    {clause}
+                  </span>
+                )}
+
+                {source.url && (
+                  <a
+                    href={source.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="std-source-link"
+                  >
+                    View source
+                    <ExternalLink size={12} />
+                  </a>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    ) : (
+      <div className="context-empty-state">
+        <FileText size={18} />
+        <p>
+          No source documents were returned for this query.
+        </p>
+      </div>
+    )}
+  </div>
+)}
+
+       {/* 2. LIVE CERTIFICATION SOURCES */}
+{context.type === 'certification' && (
+  <div className="context-section-block">
+    <span className="section-block-title">
+      {liveSources.length > 0
+        ? 'RETRIEVED SOURCES'
+        : 'NO SOURCES RETRIEVED'}
+    </span>
+
+    {liveSources.length > 0 ? (
+      <div className="standards-cards-stack">
+        {liveSources.map((source, i) => {
+          const title =
+            source.document_title ||
+            source.title ||
+            'BIS Certification Document';
+
+          const standardCode =
+            source.standard_id ||
+            source.code ||
+            source.standard ||
+            'BIS Source';
+
+          const clause =
+            source.clause ||
+            '';
+
+          const snippet =
+            source.snippet ||
+            source.text ||
+            '';
+
+          return (
+            <div key={i} className="std-context-card">
+              <div className="std-card-top">
+                <strong className="std-card-code">
+                  {standardCode}
+                </strong>
+              </div>
+
+              <p className="std-card-title">
+                {title}
+              </p>
+
+              {snippet && (
+                <p className="std-card-snippet">
+                  {snippet}
+                </p>
+              )}
+
+              <div className="std-card-meta">
+                {clause && (
+                  <span className="std-meta-clause">
+                    {clause}
+                  </span>
+                )}
+
+                {source.url && (
+                  <a
+                    href={source.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="std-source-link"
+                  >
+                    View source
+                    <ExternalLink size={12} />
+                  </a>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    ) : (
+      <div className="context-empty-state">
+        <FileText size={18} />
+        <p>
+          No source documents were returned for this query.
+        </p>
+      </div>
+    )}
+  </div>
+)}
+
+{/* 3. LIVE LABORATORY CONTEXT */}
+{context.type === 'laboratory' && (
+  <div className="context-section-block">
+    <span className="section-block-title">
+      {liveLabs.length > 0
+        ? 'MATCHING TEST FACILITIES'
+        : 'NO LABS FOUND'}
+    </span>
+
+    {liveLabs.length > 0 ? (
+      <div className="labs-cards-stack">
+        {liveLabs.map((lab, idx) => (
+          <div key={idx} className="lab-context-card">
+            <div className="lab-card-header">
+              <strong className="lab-name">
+                {lab.name}
+              </strong>
+
+              <span className="lab-badge">
+                OSL
+              </span>
             </div>
 
-            {context.hallmarkComponents && (
-              <div className="hallmark-marks-breakdown">
-                <span className="section-block-title">3 MANDATORY HALLMARKS</span>
-                <div className="hallmarks-list">
-                  {context.hallmarkComponents.map((item, idx) => (
-                    <div key={idx} className="hallmark-mark-item">
-                      <Award size={15} className="hallmark-icon" />
-                      <div>
-                        <strong>{item.mark}</strong>
-                        <p>{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            <p className="lab-location">
+              {lab.state}
+            </p>
+
+<div className="lab-scope-box">
+  <span className="lab-scope-label">
+    OSL Code:
+  </span>
+
+  <span className="lab-scope-text">
+    {lab.osl_code || 'Not available'}
+  </span>
+</div>
+
+{lab.source_url && (
+  <a
+    href={lab.source_url}
+    target="_blank"
+    rel="noreferrer"
+    className="std-source-link"
+  >
+    View source
+    <ExternalLink size={12} />
+  </a>
+)}
           </div>
-        )}
+        ))}
+      </div>
+    ) : (
+      <div className="context-empty-state">
+        <FileText size={18} />
+        <p>
+          No matching laboratories were returned for this query.
+        </p>
+      </div>
+    )}
+  </div>
+)}
+
+{/* 4. HALLMARKING CONTEXT */}
+{context.type === 'hallmarking' && (
+  <div className="context-section-block">
+    <span className="section-block-title">
+      {liveSources.length > 0
+        ? 'RETRIEVED SOURCES'
+        : 'NO SOURCES RETRIEVED'}
+    </span>
+
+    {liveSources.length > 0 ? (
+      <div className="standards-cards-stack">
+        {liveSources.map((source, i) => {
+          const title =
+            source.document_title ||
+            source.title ||
+            'BIS Hallmarking Source';
+
+          const standardCode =
+            source.standard_id ||
+            source.code ||
+            source.standard ||
+            'BIS Source';
+
+          const clause =
+            source.clause ||
+            '';
+
+          const snippet =
+            source.snippet ||
+            source.text ||
+            '';
+
+          return (
+            <div key={i} className="std-context-card">
+              <div className="std-card-header">
+                <span className="std-card-code">
+                  {standardCode}
+                </span>
+
+                {clause && (
+                  <span className="std-card-clause">
+                    {clause}
+                  </span>
+                )}
+              </div>
+
+              <h4 className="std-card-title">
+                {title}
+              </h4>
+
+              {snippet && (
+                <p className="std-card-snippet">
+                  {snippet}
+                </p>
+              )}
+
+              {source.url && (
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="std-card-link"
+                >
+                  View source <ExternalLink size={13} />
+                </a>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    ) : (
+      <div className="context-empty-state">
+        <FileText size={18} />
+        <p>
+          No BIS source documents were returned for this query.
+        </p>
+      </div>
+    )}
+  </div>
+)}
 
         {/* 5. CONSUMER CONTEXT */}
         {context.type === 'consumer' && context.resources && (

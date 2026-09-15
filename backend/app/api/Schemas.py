@@ -15,9 +15,17 @@ class Citation(BaseModel):
     clause: Optional[str] = None
     document_title: Optional[str] = None
     snippet: Optional[str] = None
+    url: Optional[str] = None
+
+class LabResult(BaseModel):
+    name: str
+    state: str
+    osl_code: str
+    source_url: str = ""
 
 
 class QueryResponse(BaseModel):
     query: str
     response: str
     sources: List[Citation] = []
+    labs: List[LabResult] = []
