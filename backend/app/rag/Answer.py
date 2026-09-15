@@ -14,6 +14,7 @@ from app.rag.Retriever import build_context
 from app.llm.generator import BISLLMGenerator
 
 logger = logging.getLogger(__name__)
+MAX_CONTEXT_CHARS = 12000
 
 _NO_INFO_MESSAGE = (
     "I couldn't find sufficient information in the available BIS sources "
@@ -48,6 +49,9 @@ def answer_from_documents(question: str) -> RagAnswer:
 
     generator = BISLLMGenerator()
     try:
+        trimmed_context = context.strip()[:MAX_CONTEXT_CHARS]
+
+
         answer_text = generator.generate_answer(question=question, context=context)
     except (ValueError, RuntimeError) as exc:
         logger.error("LLM generation failed for question %r: %s", question, exc)
