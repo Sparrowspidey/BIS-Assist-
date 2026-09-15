@@ -31,5 +31,6 @@ class BISLLMGenerator:
             question=question,
             context=context,
         )
+        
 
         return self.ollama_client.generate(prompt)

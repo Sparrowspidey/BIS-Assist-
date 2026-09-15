@@ -64,6 +64,9 @@ IMPORTANT RULES:
 
         if not context or not context.strip():
             raise ValueError("Context cannot be empty.")
+         # Prevent excessively large prompts and slow generation.
+        MAX_CONTEXT_CHARS = 12000
+        trimmed_context = context.strip()[:MAX_CONTEXT_CHARS]
 
         prompt = f"""
 {self.SYSTEM_INSTRUCTIONS}
@@ -72,7 +75,7 @@ IMPORTANT RULES:
 BIS CONTEXT
 ====================
 
-{context.strip()}
+{trimmed_context}
 
 ====================
 USER QUESTION

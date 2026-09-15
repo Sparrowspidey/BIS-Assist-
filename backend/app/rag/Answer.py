@@ -1,10 +1,3 @@
-"""
-The RAG_QUERY path's entry point: question in, grounded answer + citations out.
-
-This is what app/api/routes.py's RAG_QUERY branch should call, replacing
-its current placeholder text.
-"""
-
 from __future__ import annotations
 
 import logging
@@ -29,31 +22,65 @@ class RagAnswer:
 
 
 def answer_from_documents(question: str) -> RagAnswer:
-    """
-    Retrieves relevant BIS content and generates a grounded answer.
-
-    Deliberately does NOT call the LLM at all when nothing relevant was
-    found (build_context returns empty) — both because
-    BISPromptBuilder.build_prompt() rejects empty context by design
-    (correctly — there'd be nothing to ground an answer in), and because
-    calling an LLM to generate from no context risks it filling the gap
-    with unsupported claims, exactly what prompt_builder.py's grounding
-    rules exist to prevent. A clear "not found" message is safer and
-    faster than a wasted, ungrounded generation call.
-    """
     context, sources = build_context(question)
 
     if not context:
-        return RagAnswer(answer=_NO_INFO_MESSAGE, sources=[])
+        return RagAnswer(
+            answer=_NO_INFO_MESSAGE,
+            sources=[],
+        )
 
     generator = BISLLMGenerator()
+
     try:
-        answer_text = generator.generate_answer(question=question, context=context)
+        answer_text = generator.generate_answer(
+            question=question,
+            context=context,
+        )
+
     except (ValueError, RuntimeError) as exc:
-        logger.error("LLM generation failed for question %r: %s", question, exc)
+        logger.error(
+            "LLM generation failed for question %r: %s",
+            question,
+            exc,
+        )
+
         return RagAnswer(
             answer="Something went wrong generating an answer. Please try again.",
             sources=[],
         )
 
-    return RagAnswer(answer=answer_text, sources=sources)
+    formatted_sources = []
+
+    for source in sources:
+        metadata = source.get("metadata", {})
+
+        formatted_sources.append(
+            {
+                "standard_id": (
+                    source.get("standard_id")
+                    or metadata.get("standard_id")
+                ),
+                "clause": (
+                    source.get("clause")
+                    or metadata.get("clause")
+                ),
+                "document_title": (
+                    source.get("title")
+                    or source.get("document_title")
+                    or metadata.get("title")
+                    or metadata.get("document_title")
+                ),
+                "snippet": (
+                    source.get("text")
+                    or source.get("snippet")
+                    or metadata.get("text")
+                    or metadata.get("snippet")
+                ),
+            }
+        )
+
+    return RagAnswer(
+        answer=answer_text,
+        sources=formatted_sources,
+    )
