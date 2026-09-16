@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Sparkles, Globe, Shield, ArrowRight } from 'lucide-react';
+import {  Globe, ArrowRight } from 'lucide-react';
 
 export default function Navbar() {
   const [langMenu, setLangMenu] = useState(false);
@@ -22,11 +22,8 @@ export default function Navbar() {
 
         {/* Navigation links */}
         <div className="nav-links">
-          <Link to="/chat/standards" className="nav-link-item">
-            <Sparkles size={14} className="nav-icon-sparkle" />
-            <span>AI Workspace</span>
-          </Link>
-          <a href="#standards" className="nav-link-item">
+          
+          <a href="/chat/standards" className="nav-link-item">
             Standards
           </a>
           <Link to="/chat/certification" className="nav-link-item">
@@ -75,7 +72,7 @@ export default function Navbar() {
             className="nav-cta"
             onClick={() => navigate('/chat/standards')}
           >
-            <span>Launch AI</span>
+            <span>ASK AI</span>
             <ArrowRight size={14} />
           </button>
         </div>

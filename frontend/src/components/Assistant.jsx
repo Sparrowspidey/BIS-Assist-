@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Sparkles, ArrowRight, CheckCircle2, FileText, ExternalLink } from 'lucide-react';
+import { Sparkles, ArrowRight,  FileText} from 'lucide-react';
 import AIOrb from './chatbot/AIOrb';
 import './Assistant.css';
 
