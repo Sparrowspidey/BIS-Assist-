@@ -6,18 +6,29 @@ from app.router import Intent, detect_intent
 from app.api.Schemas import QueryRequest, QueryResponse
 from app.rag.Answer import answer_from_documents
 from app.rag.General_chat import handle_general_chat
+from app.translation import (
+    detect_language,
+    translate_to_english,
+    translate_from_english,
+)
 
 router = APIRouter()
 
 
 @router.get("/")
 async def root():
-    return {"project": "Standard_AI - BIS Assist", "status": "online"}
+    return {
+        "project": "Standard_AI - BIS Assist",
+        "status": "online",
+    }
 
 
 @router.get("/health")
 async def health_check():
-    return {"status": "healthy", "service": "BIS-Assist API"}
+    return {
+        "status": "healthy",
+        "service": "BIS-Assist API",
+    }
 
 
 @router.post("/ask", response_model=QueryResponse)
@@ -33,38 +44,119 @@ async def ask_query(request: QueryRequest) -> QueryResponse:
         GENERAL_CHAT   -> can stay simple / static, or route through the
                           LLM module with no retrieval context
 
-    Multilingual (FR8) is NOT handled here — per app/router/intent_detector.py's
-    module docstring, language detection/translation should wrap this whole
-    function (translate query in, classify + answer in English, translate
-    answer back out), not live inside intent branches. That wrapper belongs
-    in app/translation/, applied by whoever calls this endpoint or by
-    middleware — not added as more logic in this function.
+  Main BIS Assist query pipeline.
+
+    Multilingual flow:
+
+        1. Detect the user's language.
+        2. Translate the query to English when necessary.
+        3. Detect intent using the English query.
+        4. Run the appropriate backend action.
+        5. Translate the generated answer back to the user's language.
+
+    The backend internally works in English so that the existing
+    RAG / lab / recommendation logic does not need separate
+    language-specific implementations.
     """
     try:
         sources = []
         labs = []
+
+        original_query = request.query.strip()
+
+        if not original_query:
+            raise HTTPException(
+                status_code=400,
+                detail="Query cannot be empty.",
+            )
+
+        # ---------------------------------------------------------------
+        # 1. Determine user's language
+        # ---------------------------------------------------------------
+        #
+        # The frontend can explicitly send:
+        #
+        #     language = "hi"
+        #
+        # When a non-English language is selected, trust that selection.
+        #
+        # Otherwise detect the language from the actual query.
+        #
+
+        requested_language = (request.language or "").strip().lower()
+
+        if requested_language and requested_language != "en":
+            user_language = requested_language
+        else:
+            user_language = detect_language(original_query)
+
+        print("DEBUG original_query:", repr(original_query))
+        print("DEBUG requested_language:", repr(requested_language))
+        print("DEBUG user_language:", repr(user_language))
+
+        # ---------------------------------------------------------------
+        # 2. Translate user's query into English
+        # ---------------------------------------------------------------
+
+        english_query = translate_to_english(
+            original_query,
+            user_language,
+        )
+
+        print("DEBUG english_query:", repr(english_query))
+
+       
+        # ---------------------------------------------------------------
+        # 3. Detect intent using the English query
+        # ---------------------------------------------------------------
+
+        intent = detect_intent(english_query)
+
+        # Default answer
         answer = "Temporary response: unable to determine the intent."
-        intent = detect_intent(request.query)
+
+        # ===============================================================
+        # RAG QUERY
+        # ===============================================================
 
         if intent == Intent.RAG_QUERY:
-            result = answer_from_documents(request.query)
+
+            result = answer_from_documents(english_query)
+
             answer = result.answer
+
             sources = [
                 {
                     "standard_id": source.get("standard_id"),
                     "clause": source.get("clause"),
-                    "document_title": source.get("document_title") or source.get("title"),
-                    "snippet": source.get("snippet") or source.get("text"),
-                    "url": source.get("url") or source.get("source_url"),
+                    "document_title": (
+                        source.get("document_title")
+                        or source.get("title")
+                    ),
+                    "snippet": (
+                        source.get("snippet")
+                        or source.get("text")
+                    ),
+                    "url": (
+                        source.get("url")
+                        or source.get("source_url")
+                    ),
                 }
                 for source in result.sources
             ]
+
+        # ===============================================================
+        # LABS LOOKUP
+        # ===============================================================
+
         elif intent == Intent.LABS_LOOKUP:
+
             from app.labs.Lookup import search_labs
 
-            matches = search_labs(request.query)
+            matches = search_labs(english_query)
 
             if matches:
+
                 labs = [
                     {
                         "name": lab["name"],
@@ -76,29 +168,124 @@ async def ask_query(request: QueryRequest) -> QueryResponse:
                 ]
 
                 lines = [
-                    f"{lab['name']} ({lab['state']}, OSL {lab['osl_code']})"
+                    f"{lab['name']} "
+                    f"({lab['state']}, OSL {lab['osl_code']})"
                     for lab in matches
                 ]
 
-                answer = "Here are some matching labs:\n" + "\n".join(lines)
+                answer = (
+                    "Here are some matching labs:\n"
+                    + "\n".join(lines)
+                )
+
             else:
+
                 labs = []
-                answer = "I couldn't find a matching lab for that location."
+
+                answer = (
+                    "I couldn't find a matching lab for that location."
+                )
+
+        # ===============================================================
+        # RECOMMENDATION
+        # ===============================================================
+
         elif intent == Intent.RECOMMENDATION:
+
             from app.recommender.Matcher import match_product
-            matches = match_product(request.query)
-            answer = "..."  # format matches into text
+
+            matches = match_product(english_query)
+
+            if matches:
+                answer = "\n".join(
+                    str(match)
+                    for match in matches
+                )
+            else:
+                answer = (
+                    "I couldn't find a suitable recommendation "
+                    "for your query."
+                )
+
+        # ===============================================================
+        # EXPLICIT TRANSLATION REQUEST
+        # ===============================================================
+
         elif intent == Intent.TRANSLATE_TEXT:
-            answer = "Temporary response: translate-text intent detected."
+
+            answer = (
+                "Translation requests are handled through the "
+                "multilingual translation layer."
+            )
+
+        # ===============================================================
+        # GENERAL CHAT
+        # ===============================================================
+
         elif intent == Intent.GENERAL_CHAT:
-            answer = handle_general_chat(request.query)
+
+            answer = handle_general_chat(english_query)
+
+        # ===============================================================
+        # UNKNOWN
+        # ===============================================================
+
+        elif intent == Intent.UNKNOWN:
+
+            # For an unknown query, try RAG as a useful fallback.
+            result = answer_from_documents(english_query)
+
+            answer = result.answer
+
+            sources = [
+                {
+                    "standard_id": source.get("standard_id"),
+                    "clause": source.get("clause"),
+                    "document_title": (
+                        source.get("document_title")
+                        or source.get("title")
+                    ),
+                    "snippet": (
+                        source.get("snippet")
+                        or source.get("text")
+                    ),
+                    "url": (
+                        source.get("url")
+                        or source.get("source_url")
+                    ),
+                }
+                for source in result.sources
+            ]
+
+        # ---------------------------------------------------------------
+        # 4. Translate final answer back to user's language
+        # ---------------------------------------------------------------
+        
+        print("DEBUG final translation language:", repr(user_language))
+        print("DEBUG answer before translation:", repr(answer[:200]))
+
+        final_answer = translate_from_english(
+            answer,
+            user_language,
+        )
+
+        # ---------------------------------------------------------------
+        # 5. Return response
+        # ---------------------------------------------------------------
 
         return QueryResponse(
-            query=request.query,
-            response=answer,
+            query=original_query,
+            response=final_answer,
             sources=sources,
             labs=labs,
         )
 
+    except HTTPException:
+        raise
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error processing query: {e}")
+
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error processing query: {e}",
+        )
