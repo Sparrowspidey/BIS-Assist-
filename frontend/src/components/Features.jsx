@@ -1,4 +1,4 @@
-import React from 'react';
+
 import FeatureCard from './FeatureCard';
 import {
   Compass,
@@ -56,7 +56,7 @@ export default function Features() {
       title: 'Multilingual Assistance',
       description:
         'Interact with BIS Assist naturally across 10+ scheduled Indian languages with speech and dialect intelligence.',
-      route: '/chat/multilingual',
+      
       accent: 'sky'
     }
   ];

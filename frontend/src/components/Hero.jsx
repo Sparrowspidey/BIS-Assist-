@@ -1,5 +1,4 @@
 
-import { useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   Sparkles,
@@ -14,7 +13,7 @@ import {
 import "./Hero.css";
 
 export default function Hero() {
-  const navigate = useNavigate();
+  
 
   return (
     <section className="bis-hero">
@@ -60,7 +59,7 @@ export default function Hero() {
 
             <button
               className="bis-ask-button"
-              onClick={() => navigate("/chat/standards")}
+              
             >
               <Sparkles size={18} />
               <span>Ask BIS AI</span>
@@ -69,7 +68,7 @@ export default function Hero() {
 
             <button
               className="bis-explore-button"
-              onClick={() => navigate("/standards")}
+              
             >
               <span>Explore Standards</span>
               <ArrowRight size={18} />
