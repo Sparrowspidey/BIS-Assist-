@@ -1,4 +1,4 @@
-# Standard_AI
+# BIS_Assist
 
 An **AI-powered conversational assistant for Indian Standards and BIS Services**, built using **open-source LLMs**, **RAG (Retrieval-Augmented Generation)**, and a **secure, modular architecture**.
 This project aims to help industries, MSMEs, startups, students, and consumers find applicable Indian Standards, understand BIS certification schemes, and get accurate, source-backed answers to their queries.
