@@ -1,0 +1,818 @@
+/* =========================================================
+   BIS SMARTSTANDARDS - NAVBAR
+   ========================================================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #dce7ee;
+  box-shadow: 0 2px 12px rgba(0, 54, 95, 0.06);
+}
+
+/* =========================================================
+   MAIN NAVBAR CONTAINER
+   ========================================================= */
+
+.navbar-container {
+  width: 100%;
+  max-width: 1500px;
+  height: 68px;
+  margin: 0 auto;
+  padding: 0 28px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+/* =========================================================
+   BIS LOGO
+   ========================================================= */
+
+.bis-logo-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.bis-logo-image {
+  width: 175px;
+  height: auto;
+  max-height: 54px;
+
+  display: block;
+  object-fit: contain;
+
+  transition: transform 0.2s ease;
+}
+
+.bis-logo-link:hover .bis-logo-image {
+  transform: scale(1.015);
+}
+
+/* =========================================================
+   DESKTOP NAVIGATION
+   ========================================================= */
+
+.desktop-navigation {
+  margin-left: 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  height: 100%;
+  flex: 1;
+}
+
+/* =========================================================
+   NAV ITEMS
+   ========================================================= */
+
+.nav-item {
+  position: relative;
+
+  height: 68px;
+  padding: 0 15px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  border: none;
+  background: transparent;
+
+  color: #203f57;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 750;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.nav-item:hover {
+  color: #005b9f;
+}
+
+.active-nav {
+  color: #005b9f;
+  font-weight: 800;
+}
+
+/* Active underline */
+
+.active-nav::after {
+  content: "";
+
+  position: absolute;
+
+  left: 15px;
+  right: 15px;
+  bottom: 0;
+
+  height: 2px;
+
+  background: #0874bd;
+
+  border-radius: 2px 2px 0 0;
+}
+
+/* =========================================================
+   DROPDOWN WRAPPER
+   ========================================================= */
+
+.nav-dropdown {
+  position: relative;
+
+  height: 68px;
+
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown arrow */
+
+.dropdown-button svg {
+  transition: transform 0.2s ease;
+}
+
+.chevron-open {
+  transform: rotate(180deg);
+}
+
+/* =========================================================
+   DROPDOWN MENU
+   ========================================================= */
+
+.dropdown-menu {
+  position: absolute;
+
+  top: 62px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 250px;
+
+  padding: 7px;
+
+  background: #ffffff;
+
+  border: 1px solid #dce8ef;
+
+  border-radius: 9px;
+
+  box-shadow:
+    0 15px 35px rgba(0, 51, 88, 0.13),
+    0 3px 8px rgba(0, 51, 88, 0.05);
+
+  animation: dropdownIn 0.16s ease;
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Dropdown links */
+
+.dropdown-menu a {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  padding: 11px 13px;
+
+  border-radius: 7px;
+
+  text-decoration: none;
+
+  color: #173b58;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.dropdown-menu a:hover {
+  background: #f1f8fc;
+  color: #005f9f;
+}
+
+.dropdown-menu a span {
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.dropdown-menu a small {
+  font-size: 9px;
+  line-height: 1.35;
+
+  color: #7890a2;
+}
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
+.language-wrapper {
+  position: relative;
+
+  height: 68px;
+
+  display: flex;
+  align-items: center;
+
+  margin-left: 7px;
+}
+
+.language-nav-button {
+  height: 36px;
+
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  border: 1px solid #d9e6ee;
+  border-radius: 18px;
+
+  background: #f7fbfd;
+
+  color: #294b63;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.language-nav-button:hover {
+  background: #eef7fc;
+
+  border-color: #b9d8ea;
+
+  color: #005e9e;
+}
+
+/* =========================================================
+   LANGUAGE DROPDOWN
+   ========================================================= */
+
+.language-menu {
+  position: absolute;
+
+  top: 59px;
+  right: 0;
+
+  width: 190px;
+
+  padding: 7px;
+
+  background: #ffffff;
+
+  border: 1px solid #dce8ef;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 15px 35px rgba(0, 51, 88, 0.13),
+    0 3px 8px rgba(0, 51, 88, 0.05);
+
+  animation: languageIn 0.16s ease;
+}
+
+@keyframes languageIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Language heading */
+
+.language-title {
+  padding: 8px 10px;
+
+  color: #7c91a1;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+/* Language buttons */
+
+.language-menu button {
+  width: 100%;
+  height: 36px;
+
+  padding: 0 10px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #35536a;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 650;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.language-menu button:hover {
+  background: #f1f8fc;
+
+  color: #0063a6;
+}
+
+/* More languages */
+
+.language-menu .all-languages {
+  margin-top: 4px;
+
+  padding-top: 8px;
+
+  border-top: 1px solid #e5edf2;
+
+  border-radius: 0;
+
+  color: #0065a8;
+
+  font-weight: 750;
+}
+
+.all-languages svg {
+  margin-left: auto;
+}
+
+/* =========================================================
+   ASK AI BUTTON
+   ========================================================= */
+
+.ask-ai-button {
+  height: 37px;
+
+  margin-left: 8px;
+
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  border: none;
+  border-radius: 19px;
+
+  background: linear-gradient(
+    135deg,
+    #075d9d,
+    #0875bd
+  );
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.6px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 14px rgba(0, 91, 159, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ask-ai-button:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 18px rgba(0, 91, 159, 0.25);
+}
+
+.ask-ai-button:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   ASHOKA EMBLEM
+   ========================================================= */
+
+/* =========================================================
+   ASHOKA EMBLEM - FAR RIGHT
+   ========================================================= */
+
+.navbar-container {
+  position: relative;
+}
+
+/* Keep navigation centered but leave space for emblem */
+.desktop-navigation {
+  padding-right: 75px;
+}
+
+/* Emblem positioned at extreme right */
+.ashoka-emblem {
+  position: absolute;
+
+  right: 25px;
+  top: 0;
+
+  height: 68px;
+  width: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  border-left: 1px solid #dce7ed;
+
+  flex-shrink: 0;
+}
+
+/* Bigger emblem */
+.ashoka-emblem-image {
+  width: 42px;
+  height: 58px;
+
+  object-fit: contain;
+
+  display: block;
+
+  opacity: 0.95;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.ashoka-emblem:hover .ashoka-emblem-image {
+  transform: scale(1.05);
+
+  opacity: 1;
+}
+
+/* =========================================================
+   MOBILE MENU BUTTON
+   ========================================================= */
+
+.mobile-menu-button {
+  display: none;
+
+  margin-left: auto;
+
+  width: 40px;
+  height: 40px;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #d7e5ed;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #075b94;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.mobile-menu-button:hover {
+  background: #f4f9fc;
+  border-color: #bcd6e5;
+}
+
+/* =========================================================
+   MOBILE NAVIGATION
+   ========================================================= */
+
+.mobile-navigation {
+  display: none;
+}
+
+/* =========================================================
+   TABLET / SMALL DESKTOP
+   ========================================================= */
+
+@media (max-width: 1250px) {
+
+  .navbar-container {
+    padding: 0 20px;
+  }
+
+  .desktop-navigation {
+    margin-left: 25px;
+    gap: 1px;
+  }
+
+  .bis-logo-image {
+    width: 155px;
+  }
+
+  .nav-item {
+    padding: 0 10px;
+    font-size: 11px;
+  }
+
+  .language-nav-button {
+    padding: 0 9px;
+  }
+
+  .ask-ai-button {
+    padding: 0 12px;
+  }
+
+  .ashoka-emblem {
+    margin-left: 4px;
+    padding-left: 10px;
+  }
+
+  .ashoka-emblem-image {
+    width: 30px;
+    height: 43px;
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+  .navbar-container {
+    height: 66px;
+    padding: 0 18px;
+  }
+
+  .bis-logo-image {
+    width: 145px;
+  }
+
+  .desktop-navigation {
+    margin-left: 12px;
+  }
+
+  .nav-item {
+    padding: 0 7px;
+    font-size: 10px;
+  }
+
+  .language-nav-button {
+    font-size: 10px;
+  }
+
+  .ask-ai-button {
+    padding: 0 10px;
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .navbar-container {
+    height: 65px;
+    padding: 0 18px;
+  }
+
+  .bis-logo-image {
+    width: 155px;
+  }
+
+  /* Hide desktop navigation */
+
+  .desktop-navigation {
+    display: none;
+  }
+
+  /* Show mobile button */
+
+  .mobile-menu-button {
+    display: flex;
+  }
+
+  /* Mobile navigation panel */
+
+  .mobile-navigation {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    padding: 10px 18px 17px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #e5edf2;
+
+    box-shadow:
+      0 12px 25px rgba(0, 51, 88, 0.09);
+
+    animation: mobileNavIn 0.18s ease;
+  }
+
+  @keyframes mobileNavIn {
+
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  }
+
+  /* Mobile links */
+
+  .mobile-navigation > a {
+
+    min-height: 44px;
+
+    padding: 0 13px;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 7px;
+
+    color: #28485f;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .mobile-navigation > a:hover {
+    background: #f1f8fc;
+
+    color: #0064a7;
+  }
+
+  /* Mobile AI button */
+
+  .mobile-ai-button {
+
+    min-height: 44px;
+
+    margin-top: 7px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background:
+      linear-gradient(
+        135deg,
+        #075d9d,
+        #0875bd
+      );
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    box-shadow:
+      0 5px 14px rgba(0, 91, 159, 0.15);
+  }
+
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .navbar-container {
+    padding: 0 13px;
+  }
+
+  .bis-logo-image {
+    width: 135px;
+  }
+
+  .mobile-menu-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .mobile-navigation {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+}
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .bis-logo-image {
+    width: 120px;
+  }
+
+  .navbar-container {
+    height: 62px;
+  }
+
+  .mobile-navigation > a {
+    min-height: 42px;
+    font-size: 12px;
+  }
+
+}
