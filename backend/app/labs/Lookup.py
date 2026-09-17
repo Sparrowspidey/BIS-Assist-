@@ -134,6 +134,20 @@ def search_labs(query: str, top_k: int = 5) -> list[dict]:
         "is",
         "are",
         "please",
+        "lab",
+        "labs",
+        "laboratory",
+        "laboratories",
+"testing laboratory",
+"testing lab",
+"test lab",
+"test laboratory",
+"testing facility",
+"testing facilities",
+"find a lab",
+"find labs",
+"find laboratory",
+"find laboratories",
     }
 
     query_terms = [

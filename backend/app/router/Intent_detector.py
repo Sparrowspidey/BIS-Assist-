@@ -144,6 +144,17 @@ _RAG_QUERY_KEYWORDS = [
     "certified product",
     "consumer complaint",
     "consumer protection",
+    "certified",
+"certify",
+"certification process",
+"get certified",
+"product certified",
+"certify my product",
+"apply for certification",
+"how to get certified",
+"how to certify",
+"product certification",
+"bis certification",
 ]
 
 _GENERAL_CHAT_KEYWORDS = [
