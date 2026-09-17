@@ -1,0 +1,1558 @@
+/* ============================================================
+   BIS SMARTSTANDARDS HERO
+   ============================================================ */
+
+.bis-hero {
+  position: relative;
+  width: 100%;
+  min-height: 720px;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      115deg,
+      #ffffff 0%,
+      #f9fcff 36%,
+      #eef8ff 70%,
+      #ffffff 100%
+    );
+
+  color: #0d2342;
+}
+
+
+/* ============================================================
+   BACKGROUND
+   ============================================================ */
+
+.hero-sky {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse at 72% 20%,
+      rgba(102, 184, 238, 0.20),
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 52% 72%,
+      rgba(255, 190, 92, 0.15),
+      transparent 30%
+    );
+
+  pointer-events: none;
+}
+
+
+.bis-hero::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.18;
+
+  background-image:
+    linear-gradient(
+      rgba(20, 91, 140, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(20, 91, 140, 0.04) 1px,
+      transparent 1px
+    );
+
+  background-size: 50px 50px;
+}
+
+
+.hero-light {
+  position: absolute;
+
+  border-radius: 50%;
+
+  filter: blur(100px);
+
+  pointer-events: none;
+}
+
+
+.hero-light-blue {
+  width: 450px;
+  height: 450px;
+
+  right: -150px;
+  top: 40px;
+
+  background: rgba(56, 154, 221, 0.12);
+}
+
+
+.hero-light-orange {
+  width: 350px;
+  height: 350px;
+
+  left: 25%;
+  bottom: -180px;
+
+  background: rgba(243, 170, 72, 0.12);
+}
+
+
+/* ============================================================
+   HERO INNER
+   ============================================================ */
+
+.bis-hero-inner {
+  position: relative;
+  z-index: 2;
+
+  width: min(1450px, 94%);
+
+  min-height: 720px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    0.93fr
+    1.07fr;
+
+  align-items: center;
+
+  gap: 35px;
+
+  padding: 65px 0 50px;
+}
+
+
+/* ============================================================
+   LEFT CONTENT
+   ============================================================ */
+
+.bis-hero-content {
+  position: relative;
+
+  z-index: 10;
+
+  padding-left: 20px;
+
+  max-width: 690px;
+}
+
+
+/* ============================================================
+   EYEBROW
+   ============================================================ */
+
+.bis-hero-eyebrow {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 9px 16px;
+
+  border-radius: 30px;
+
+  background:
+    rgba(231, 244, 253, 0.85);
+
+  border: 1px solid
+    rgba(36, 119, 177, 0.12);
+
+  color: #145b91;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.4px;
+
+  box-shadow:
+    0 8px 20px
+      rgba(23, 83, 124, 0.06);
+}
+
+
+.bis-hero-eyebrow span {
+  font-size: 15px;
+}
+
+
+/* ============================================================
+   HEADING
+   ============================================================ */
+
+.bis-hero-content h1 {
+  margin: 27px 0 20px;
+
+  font-size:
+    clamp(
+      48px,
+      5.2vw,
+      75px
+    );
+
+  line-height: 0.99;
+
+  letter-spacing: -3.8px;
+
+  font-weight: 850;
+
+  color: #102746;
+}
+
+
+.bis-hero-content h1 span {
+  background:
+    linear-gradient(
+      90deg,
+      #0865b4,
+      #087bc1 48%,
+      #079383
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* ============================================================
+   DESCRIPTION
+   ============================================================ */
+
+.bis-hero-content > p {
+  max-width: 620px;
+
+  margin: 0 0 29px;
+
+  color: #526c88;
+
+  font-size: 17px;
+
+  line-height: 1.7;
+}
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.bis-hero-buttons {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  flex-wrap: wrap;
+}
+
+
+.bis-ask-button,
+.bis-explore-button {
+  height: 54px;
+
+  padding: 0 21px;
+
+  border-radius: 12px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+/* Ask */
+
+.bis-ask-button {
+  border: none;
+
+  color: #fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0868b8,
+      #07589c
+    );
+
+  box-shadow:
+    0 14px 28px
+      rgba(9, 94, 163, 0.23);
+}
+
+
+.bis-ask-button:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 20px 38px
+      rgba(9, 94, 163, 0.30);
+}
+
+
+/* Explore */
+
+.bis-explore-button {
+  color: #0864ae;
+
+  background:
+    rgba(255, 255, 255, 0.88);
+
+  border: 1.5px solid #76b4e2;
+}
+
+
+.bis-explore-button:hover {
+  transform: translateY(-3px);
+
+  background: #fff;
+
+  border-color: #247fbe;
+
+  box-shadow:
+    0 13px 28px
+      rgba(20, 100, 155, 0.10);
+}
+
+
+/* ============================================================
+   STATS
+   ============================================================ */
+
+.bis-hero-stats {
+  display: flex;
+
+  align-items: center;
+
+  gap: 22px;
+
+  margin-top: 45px;
+}
+
+
+.bis-stat {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+.bis-stat-icon {
+  width: 43px;
+  height: 43px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #0867b2;
+
+  background:
+    rgba(232, 245, 255, 0.95);
+
+  border: 1px solid #d4eaf8;
+}
+
+
+.bis-stat > div:last-child {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.bis-stat strong {
+  font-size: 20px;
+
+  color: #07558f;
+
+  line-height: 1;
+}
+
+
+.bis-stat span {
+  font-size: 9px;
+
+  color: #688099;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.7px;
+}
+
+
+.bis-stat-divider {
+  width: 1px;
+
+  height: 40px;
+
+  background: #cfdee9;
+}
+
+
+/* ============================================================
+   RIGHT VISUAL
+   ============================================================ */
+
+.bis-hero-visual {
+  position: relative;
+
+  min-height: 610px;
+
+  width: 100%;
+}
+
+
+/* ============================================================
+   ORBIT RINGS
+   ============================================================ */
+
+.hero-ring {
+  position: absolute;
+
+  left: 53%;
+  top: 40%;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  border: 1px solid
+    rgba(37, 139, 202, 0.18);
+
+  pointer-events: none;
+}
+
+
+.ring-1 {
+  width: 340px;
+  height: 340px;
+}
+
+
+.ring-2 {
+  width: 450px;
+  height: 450px;
+
+  border-style: dashed;
+
+  opacity: 0.6;
+}
+
+
+.ring-3 {
+  width: 540px;
+  height: 260px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-12deg);
+
+  opacity: 0.5;
+}
+
+
+/* ============================================================
+   CENTRAL BIS LOGO
+   ============================================================ */
+
+.bis-central-logo {
+  position: absolute;
+
+  left: 53%;
+  top: 40%;
+
+  transform:
+    translate(-50%, -50%);
+
+  z-index: 6;
+
+  width: 220px;
+  height: 220px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.75);
+
+  border: 1px solid
+    rgba(39, 132, 188, 0.12);
+
+  box-shadow:
+    0 0 0 14px
+      rgba(255, 255, 255, 0.45),
+
+    0 0 0 28px
+      rgba(255, 255, 255, 0.20),
+
+    0 30px 65px
+      rgba(20, 95, 145, 0.15);
+
+  backdrop-filter: blur(12px);
+}
+
+
+.bis-logo-glow {
+  position: absolute;
+
+  inset: 10px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(83, 170, 222, 0.13),
+      transparent 68%
+    );
+
+  filter: blur(10px);
+}
+
+
+/* ============================================================
+   LOGO
+   ============================================================ */
+
+.bis-logo-white {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+
+.bis-mark {
+  width: 115px;
+  height: 90px;
+
+  display: flex;
+
+  justify-content: center;
+}
+
+
+.bis-mark-triangle {
+  position: relative;
+
+  width: 105px;
+  height: 82px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0969b4,
+      #07539a
+    );
+
+  clip-path:
+    polygon(
+      50% 0,
+      100% 82%,
+      0 82%
+    );
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+.bis-mark-inner {
+  width: 65px;
+  height: 48px;
+
+  background: white;
+
+  clip-path:
+    polygon(
+      50% 0,
+      100% 100%,
+      0 100%
+    );
+
+  margin-top: 15px;
+}
+
+
+.bis-mark-dot {
+  position: absolute;
+
+  width: 23px;
+  height: 23px;
+
+  top: 26px;
+
+  border-radius: 50%;
+
+  background: #e8473f;
+
+  box-shadow:
+    0 5px 12px
+      rgba(232, 71, 63, 0.25);
+}
+
+
+.bis-logo-word {
+  margin-top: 2px;
+
+  font-size: 29px;
+
+  font-weight: 850;
+
+  color: #082e55;
+
+  letter-spacing: 1px;
+}
+
+
+/* ============================================================
+   SERVICE CARDS
+   ============================================================ */
+
+.hero-service-card {
+  position: absolute;
+
+  z-index: 10;
+
+  width: 205px;
+
+  min-height: 91px;
+
+  padding: 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  border-radius: 17px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.88
+    );
+
+  border: 1px solid
+    rgba(27, 116, 170, 0.14);
+
+  box-shadow:
+    0 17px 38px
+      rgba(22, 74, 108, 0.11);
+
+  backdrop-filter: blur(16px);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.hero-service-card:hover {
+  transform:
+    translateY(-6px)
+    scale(1.02);
+
+  box-shadow:
+    0 24px 48px
+      rgba(22, 74, 108, 0.16);
+}
+
+
+/* positions */
+
+.service-standards {
+  top: 55px;
+  left: 90px;
+}
+
+
+.service-certification {
+  top: 58px;
+  right: 25px;
+}
+
+
+.service-laboratory {
+  top: 220px;
+  left: 20px;
+}
+
+
+.service-hallmarking {
+  top: 235px;
+  right: -5px;
+}
+
+
+/* ============================================================
+   SERVICE ICON
+   ============================================================ */
+
+.hero-service-icon {
+  min-width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+.hero-service-icon.blue {
+  color: #0871bd;
+  background: #e6f4ff;
+}
+
+
+.hero-service-icon.green {
+  color: #07886d;
+  background: #e6f8f1;
+}
+
+
+.hero-service-icon.purple {
+  color: #6949b1;
+  background: #f0eafe;
+}
+
+
+.hero-service-icon.orange {
+  color: #d67616;
+  background: #fff1df;
+}
+
+
+/* ============================================================
+   SERVICE TEXT
+   ============================================================ */
+
+.hero-service-text {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+
+.hero-service-text strong {
+  font-size: 14px;
+
+  color: #112e4d;
+
+  font-weight: 800;
+}
+
+
+.hero-service-text span {
+  font-size: 10px;
+
+  line-height: 1.4;
+
+  color: #617891;
+}
+
+
+/* ============================================================
+   INDIA / INDUSTRY VISUAL
+   ============================================================ */
+
+.hero-india-visual {
+  position: absolute;
+
+  left: 18%;
+  right: -7%;
+
+  bottom: 0;
+
+  height: 220px;
+
+  overflow: hidden;
+
+  z-index: 1;
+
+  opacity: 0.92;
+}
+
+
+/* ============================================================
+   HILLS
+   ============================================================ */
+
+.industry-hills {
+  position: absolute;
+
+  left: -10%;
+  bottom: 5px;
+
+  width: 120%;
+  height: 110px;
+
+  background:
+    linear-gradient(
+      145deg,
+      transparent 42%,
+      #b7d9ca 43%,
+      #9bc6ad 63%,
+      transparent 64%
+    );
+
+  opacity: 0.65;
+}
+
+
+/* ============================================================
+   FACTORY
+   ============================================================ */
+
+.industry-factory {
+  position: absolute;
+
+  bottom: 50px;
+
+  left: 20%;
+
+  width: 250px;
+
+  height: 115px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  gap: 14px;
+
+  opacity: 0.75;
+}
+
+
+.industry-factory div {
+  width: 32px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #718b98,
+      #526f7d
+    );
+
+  border-radius: 4px 4px 0 0;
+
+  position: relative;
+}
+
+
+.industry-factory div:nth-child(1) {
+  height: 70px;
+}
+
+
+.industry-factory div:nth-child(2) {
+  height: 100px;
+}
+
+
+.industry-factory div:nth-child(3) {
+  height: 82px;
+}
+
+
+.industry-factory div:nth-child(4) {
+  height: 110px;
+}
+
+
+.industry-factory div:nth-child(5) {
+  height: 65px;
+}
+
+
+/* ============================================================
+   CITY
+   ============================================================ */
+
+.industry-city {
+  position: absolute;
+
+  right: 15%;
+
+  bottom: 52px;
+
+  height: 130px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  gap: 8px;
+
+  opacity: 0.55;
+}
+
+
+.industry-city span {
+  width: 27px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #7aa2b9,
+      #50748c
+    );
+
+  border-radius: 3px 3px 0 0;
+}
+
+
+.industry-city span:nth-child(1) {
+  height: 65px;
+}
+
+
+.industry-city span:nth-child(2) {
+  height: 100px;
+}
+
+
+.industry-city span:nth-child(3) {
+  height: 75px;
+}
+
+
+.industry-city span:nth-child(4) {
+  height: 125px;
+}
+
+
+/* ============================================================
+   PRODUCTS
+   ============================================================ */
+
+.product {
+  position: absolute;
+
+  bottom: 30px;
+
+  z-index: 5;
+
+  box-shadow:
+    0 15px 30px
+      rgba(35, 70, 85, 0.18);
+}
+
+
+/* Bottle */
+
+.product-bottle {
+  right: 38%;
+
+  width: 32px;
+  height: 105px;
+
+  border-radius:
+    8px 8px 10px 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #7b8e93,
+      #e1eceb,
+      #71868c
+    );
+}
+
+
+.product-bottle::before {
+  content: "";
+
+  position: absolute;
+
+  top: -13px;
+  left: 7px;
+
+  width: 18px;
+  height: 15px;
+
+  border-radius: 3px 3px 0 0;
+
+  background: #536970;
+}
+
+
+/* Box */
+
+.product-box {
+  right: 29%;
+
+  width: 72px;
+  height: 58px;
+
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #a87d4d,
+      #d3a96e
+    );
+
+  transform:
+    perspective(80px)
+    rotateY(-8deg);
+}
+
+
+/* Camera */
+
+.product-camera {
+  right: 17%;
+
+  width: 75px;
+  height: 52px;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #263d4c,
+      #101f2b
+    );
+}
+
+
+.product-camera::after {
+  content: "";
+
+  position: absolute;
+
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+
+  left: 22px;
+  top: 11px;
+
+  border: 5px solid #78909d;
+
+  background: #1c3443;
+}
+
+
+/* ============================================================
+   TRICOLOR WAVE
+   ============================================================ */
+
+.tricolor-wave {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  bottom: 0;
+
+  height: 100px;
+
+  overflow: hidden;
+
+  z-index: 6;
+}
+
+
+.wave {
+  position: absolute;
+
+  left: -5%;
+
+  width: 115%;
+
+  height: 40px;
+
+  border-radius: 50%;
+
+  transform: rotate(-4deg);
+}
+
+
+.saffron-wave {
+  bottom: 44px;
+
+  background:
+    rgba(239, 133, 39, 0.72);
+}
+
+
+.white-wave {
+  bottom: 29px;
+
+  background:
+    rgba(255, 255, 255, 0.92);
+}
+
+
+.green-wave {
+  bottom: 14px;
+
+  background:
+    rgba(18, 143, 94, 0.68);
+}
+
+
+/* ============================================================
+   INDIA SLOGAN
+   ============================================================ */
+
+.hero-india-slogan {
+  position: absolute;
+
+  right: 20px;
+  bottom: 22px;
+
+  z-index: 8;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  font-family: Georgia, serif;
+
+  font-style: italic;
+
+  color: #315c78;
+}
+
+
+.hero-india-slogan span {
+  font-size: 14px;
+}
+
+
+.hero-india-slogan strong {
+  margin-top: -3px;
+
+  font-size: 27px;
+
+  color: #0c5590;
+}
+
+
+/* ============================================================
+   RESPONSIVE - 1200
+   ============================================================ */
+
+@media (max-width: 1200px) {
+
+  .bis-hero-inner {
+    grid-template-columns:
+      0.9fr
+      1.1fr;
+
+    gap: 15px;
+  }
+
+
+  .bis-hero-content {
+    padding-left: 10px;
+  }
+
+
+  .bis-hero-content h1 {
+    font-size: 58px;
+  }
+
+
+  .hero-service-card {
+    width: 180px;
+  }
+
+
+  .service-standards {
+    left: 40px;
+  }
+
+
+  .service-certification {
+    right: 0;
+  }
+
+
+  .service-laboratory {
+    left: 0;
+  }
+
+
+  .service-hallmarking {
+    right: -15px;
+  }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE - 1000
+   ============================================================ */
+
+@media (max-width: 1000px) {
+
+  .bis-hero-inner {
+    grid-template-columns: 1fr;
+
+    padding-top: 65px;
+
+    gap: 30px;
+  }
+
+
+  .bis-hero-content {
+    max-width: 800px;
+  }
+
+
+  .bis-hero-visual {
+    max-width: 750px;
+
+    margin: auto;
+
+    width: 100%;
+  }
+
+
+  .bis-hero-content h1 {
+    font-size: 58px;
+  }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE - 700
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+  .bis-hero {
+    min-height: auto;
+  }
+
+
+  .bis-hero-inner {
+    width: 92%;
+
+    padding:
+      45px 0
+      20px;
+  }
+
+
+  .bis-hero-content h1 {
+    font-size: 44px;
+
+    letter-spacing: -2.3px;
+  }
+
+
+  .bis-hero-content > p {
+    font-size: 14px;
+  }
+
+
+  .bis-hero-buttons {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+
+  .bis-ask-button,
+  .bis-explore-button {
+    width: 100%;
+  }
+
+
+  .bis-hero-stats {
+    display: grid;
+
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 17px;
+
+    margin-top: 32px;
+  }
+
+
+  .bis-stat-divider {
+    display: none;
+  }
+
+
+  .bis-hero-visual {
+    min-height: 530px;
+  }
+
+
+  .bis-central-logo {
+    width: 155px;
+    height: 155px;
+
+    left: 50%;
+    top: 42%;
+  }
+
+
+  .bis-mark {
+    transform: scale(0.7);
+  }
+
+
+  .bis-logo-word {
+    font-size: 22px;
+  }
+
+
+  .ring-1 {
+    width: 270px;
+    height: 270px;
+  }
+
+
+  .ring-2 {
+    width: 360px;
+    height: 360px;
+  }
+
+
+  .ring-3 {
+    width: 420px;
+    height: 220px;
+  }
+
+
+  .hero-service-card {
+    width: 145px;
+
+    min-height: 70px;
+
+    padding: 8px;
+
+    gap: 7px;
+  }
+
+
+  .hero-service-icon {
+    min-width: 34px;
+    height: 34px;
+  }
+
+
+  .hero-service-icon svg {
+    width: 17px;
+  }
+
+
+  .hero-service-text strong {
+    font-size: 10px;
+  }
+
+
+  .hero-service-text span {
+    font-size: 7px;
+  }
+
+
+  .service-standards {
+    top: 20px;
+    left: 0;
+  }
+
+
+  .service-certification {
+    top: 20px;
+    right: 0;
+  }
+
+
+  .service-laboratory {
+    top: 190px;
+    left: 0;
+  }
+
+
+  .service-hallmarking {
+    top: 195px;
+    right: 0;
+  }
+
+
+  .hero-india-visual {
+    left: 0;
+    right: 0;
+
+    opacity: 0.6;
+  }
+
+
+  .hero-india-slogan {
+    right: 8px;
+
+    bottom: 20px;
+  }
+
+
+  .hero-india-slogan span {
+    font-size: 9px;
+  }
+
+
+  .hero-india-slogan strong {
+    font-size: 19px;
+  }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE - 450
+   ============================================================ */
+
+@media (max-width: 450px) {
+
+  .bis-hero-content h1 {
+    font-size: 38px;
+
+    letter-spacing: -1.8px;
+  }
+
+
+  .bis-hero-eyebrow {
+    font-size: 8px;
+
+    letter-spacing: 1px;
+  }
+
+
+  .bis-hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+
+  .bis-hero-visual {
+    min-height: 480px;
+  }
+
+
+  .bis-central-logo {
+    width: 130px;
+    height: 130px;
+  }
+
+
+  .bis-mark {
+    transform: scale(0.58);
+  }
+
+
+  .bis-logo-word {
+    font-size: 18px;
+  }
+
+
+  .hero-service-card {
+    width: 130px;
+  }
+
+
+  .service-laboratory {
+    top: 175px;
+  }
+
+
+  .service-hallmarking {
+    top: 180px;
+  }
+
+
+  .hero-india-visual {
+    height: 180px;
+  }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+
+}
