@@ -62,7 +62,7 @@ export default function Navbar() {
           {/* STANDARDS */}
 
           <Link
-            to="/standards"
+            to="/chat/standards"
             className="nav-item"
             onClick={closeMenus}
           >
