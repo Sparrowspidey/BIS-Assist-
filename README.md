@@ -259,4 +259,4 @@ Proprietary / All Rights Reserved
 
 ---
 
-> **Standard_AI** — Built for Smart India Hackathon 2026, PS 26107.
+> **BIS_Assist** — Built for Smart India Hackathon 2026, PS 26107.
