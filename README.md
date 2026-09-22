@@ -227,14 +227,12 @@ http://127.0.0.1:8000/docs
 
 ## Contributors
 
-1. Sparrowspidey (Team Lead)
+1. Vivek Ediga @Sparrowspidey (Team Lead)
 2. Reshmitha
 3. Mahima
 4. Joel Stephan
 5. Anil Kumar
 6. Joyal Kumar
-
----
 
 ---
 
