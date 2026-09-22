@@ -7,6 +7,7 @@ import ChatHeader from '../components/chatbot/ChatHeader';
 import ChatArea from '../components/chatbot/ChatArea';
 import ContextPanel from '../components/chatbot/ContextPanel';
 import '../components/chatbot/chatbot.css';
+import { useLanguage } from "../context/LanguageContext";
 
 export default function ChatPage({ defaultDomain = 'standards' }) {
   const { domainId } = useParams();
@@ -23,6 +24,7 @@ export default function ChatPage({ defaultDomain = 'standards' }) {
   const [contextOpen, setContextOpen] = useState(true);
   const [sources, setSources] = useState([]);
   const [labs, setLabs] = useState([]);
+  const { language } = useLanguage();
  
 
   // Clear messages when switching domains so each has its tailored welcome state
@@ -57,7 +59,7 @@ export default function ChatPage({ defaultDomain = 'standards' }) {
 
   try {
     // 2. Call the real BIS Assist backend
-    const result = await askBIS(trimmed);
+    const result = await askBIS(trimmed, language);
     
     setSources(result.sources || []);
     setLabs(result.labs || []);
@@ -118,7 +120,7 @@ export default function ChatPage({ defaultDomain = 'standards' }) {
   setIsLoading(true);
 
   try {
-    const result = await askBIS(lastAiMessage.text);
+    const result = await askBIS(lastAiMessage.text, language);
 
     const regeneratedMessage = {
       id: `ai-${Date.now()}`,

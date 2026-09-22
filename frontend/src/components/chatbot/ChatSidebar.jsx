@@ -19,6 +19,8 @@ import {
 } from 'lucide-react';
 import { DOMAINS, RECENT_CHATS } from '../../data/domainConfig';
 import AIOrb from './AIOrb';
+import { useLanguage } from "../../context/LanguageContext";
+import { SUPPORTED_LANGUAGES } from "../../data/uiTranslation";
 
 const domainIcons = {
   standards: Compass,
@@ -39,6 +41,7 @@ export default function ChatSidebar({
   const [collapsed, setCollapsed] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const navigate = useNavigate();
+  const { language, setLanguage, t } = useLanguage();
 
   const handleDomainSelect = (domainId) => {
     navigate(`/chat/${domainId}`);
@@ -107,7 +110,7 @@ export default function ChatSidebar({
             title="Start a new chat session"
           >
             <Plus size={18} className="new-chat-icon" />
-            {!collapsed && <span>New Chat</span>}
+            {!collapsed && <span>{t("newChat")}</span>}
           </button>
         </div>
 
@@ -117,7 +120,9 @@ export default function ChatSidebar({
           <div className="sidebar-section">
             {!collapsed && (
               <div className="sidebar-section-header">
-                <span className="sidebar-section-title">ASSISTANT DOMAINS</span>
+                <span className="sidebar-section-title">
+                  {t("assistantDomains")}
+                 </span>
               </div>
             )}
             <nav className="domain-nav-list">
@@ -151,7 +156,9 @@ export default function ChatSidebar({
           <div className="sidebar-section">
             {!collapsed && (
               <div className="sidebar-section-header">
-                <span className="sidebar-section-title">RECENT CONVERSATIONS</span>
+                <span className="sidebar-section-title">
+                  {t("recentConversations")}
+                </span>
               </div>
             )}
             <div className="history-list">
@@ -216,6 +223,30 @@ export default function ChatSidebar({
               </div>
             </div>
           )}
+
+          {/* Language Selector */}
+{!collapsed && (
+  <div className="sidebar-language-selector">
+    <div className="sidebar-section-header">
+      <span className="sidebar-section-title">
+        {t("indianLanguagesSelector")}
+      </span>
+    </div>
+
+    <select
+      value={language}
+      onChange={(e) => setLanguage(e.target.value)}
+      className="language-select"
+      aria-label={t("selectPreferredLanguage")}
+    >
+      {SUPPORTED_LANGUAGES.map((lang) => (
+        <option key={lang.code} value={lang.code}>
+          {lang.label}
+        </option>
+      ))}
+    </select>
+  </div>
+)}
         </div>
       </aside>
 

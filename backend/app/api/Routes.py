@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
-
+import traceback
 from app.router import Intent, detect_intent
 from app.api.Schemas import QueryRequest, QueryResponse
 from app.rag.Answer import answer_from_documents
@@ -284,6 +284,10 @@ async def ask_query(request: QueryRequest) -> QueryResponse:
         raise
 
     except Exception as e:
+        print("========== /ask ERROR ==========")
+        print("ERROR:", repr(e))
+        traceback.print_exc()
+        print("================================")
 
         raise HTTPException(
             status_code=500,

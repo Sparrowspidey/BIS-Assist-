@@ -51,12 +51,12 @@ EMBEDDING_DIMENSION = 1024
 
 # ── LLM (Ollama) ───────────────────────────────────────────────────────────
 LLM_PROVIDER   = "ollama"
-LLM_MODEL      = "mistral"
+LLM_MODEL      = "llama3.1:latest"
 OLLAMA_URL     = "http://localhost:11434/api/generate"
 OLLAMA_TIMEOUT = 120  # seconds
 
 # ── RAG settings ───────────────────────────────────────────────────────────
-TOP_K_RESULTS        = 5
+TOP_K_RESULTS        = 3
 SIMILARITY_THRESHOLD = 0.30
 
 # ── Chunking settings (word-count based — see app/ingestion/chunker.py) ────

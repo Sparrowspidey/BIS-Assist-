@@ -88,7 +88,7 @@ export default function ChatArea({
                       <span className="typing-dot dot-1" />
                       <span className="typing-dot dot-2" />
                       <span className="typing-dot dot-3" />
-                      <span className="typing-label">Analyzing Indian Standards & Gazette Records...</span>
+                      <span className="typing-label">Analyzing Indian Standards...</span>
                     </div>
                   </div>
                 </div>

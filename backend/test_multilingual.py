@@ -10,7 +10,7 @@ payload = {
 response = requests.post(
     url,
     json=payload,
-    timeout=60,
+    timeout=120,
 )
 
 print("Status:", response.status_code)

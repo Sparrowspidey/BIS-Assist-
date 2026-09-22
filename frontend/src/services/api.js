@@ -15,6 +15,7 @@ export async function askBIS(query, language = "en") {
 
   if (!response.ok) {
     const errorText = await response.text();
+
     throw new Error(
       `Backend request failed (${response.status}): ${errorText}`
     );
