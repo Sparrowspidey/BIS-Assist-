@@ -7,6 +7,18 @@ Built for **Smart India Hackathon (SIH) 2026** — Problem Statement **26107**.
 
 ---
 
+> **Project Ownership**
+>
+> BIS Assist is an original project developed by Vivek Ediga and the
+> authorized project contributors.
+>
+> This repository is publicly available for academic evaluation,
+> demonstration, research, and transparency. Public visibility does not
+> constitute permission to reproduce, redistribute, commercially exploit, or
+> create derivative works from the project's implementation.
+>
+> © 2026 Vivek Ediga and authorized contributors. All Rights Reserved.
+
 ## Project Vision
 
 To build a **conversational assistant**, strictly grounded in official BIS/Indian Standards sources, capable of:
@@ -215,7 +227,7 @@ http://127.0.0.1:8000/docs
 
 ## Contributors
 
-1. Sparrowspidey (Team Lead)
+1. Vivek Ediga @Sparrowspidey (Team Lead)
 2. Reshmitha
 3. Mahima
 4. Joel Stephan
@@ -224,10 +236,27 @@ http://127.0.0.1:8000/docs
 
 ---
 
+## Copyright & Usage
+
+© 2026 Vivek Ediga and authorized contributors. All Rights Reserved.
+
+BIS Assist is publicly available for educational, research, evaluation, and
+demonstration purposes.
+
+Public availability of this repository does not grant permission to copy,
+redistribute, commercially use, sublicense, or create derivative works from
+the project's source code, documentation, original assets, prompts, or
+implementation without prior written permission.
+
+Third-party libraries, models, datasets, and other dependencies remain subject
+to their respective licenses.
+
+For reuse or collaboration requests, please contact the project maintainers.
+
 ## License
 
-MIT License
+Proprietary / All Rights Reserved
 
 ---
 
-> **Standard_AI** — Built for Smart India Hackathon 2026, PS 26107.
+> **BIS_Assist** — Built for Smart India Hackathon 2026, PS 26107.
