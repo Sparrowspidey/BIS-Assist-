@@ -11,6 +11,8 @@ from app.translation import (
     translate_to_english,
     translate_from_english,
 )
+from app.query.typo_corrector import correct_query_typos
+
 
 router = APIRouter()
 
@@ -104,7 +106,13 @@ async def ask_query(request: QueryRequest) -> QueryResponse:
         )
 
         print("DEBUG english_query:", repr(english_query))
+        
+        # ---------------------------------------------------------------
+        # Query typo correction
+        # ---------------------------------------------------------------
+        english_query = correct_query_typos(english_query)
 
+        print("DEBUG english_query_after_typo_correction:", repr(english_query))
        
         # ---------------------------------------------------------------
         # 3. Detect intent using the English query
