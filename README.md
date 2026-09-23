@@ -3,7 +3,7 @@
 An **AI-powered conversational assistant for Indian Standards and BIS Services**, built using **open-source LLMs**, **RAG (Retrieval-Augmented Generation)**, and a **secure, modular architecture**.
 This project aims to help industries, MSMEs, startups, students, and consumers find applicable Indian Standards, understand BIS certification schemes, and get accurate, source-backed answers to their queries.
 
-Built for **Smart India Hackathon (SIH) 2026** — Problem Statement **26107**.
+Built for **Smart India Hackathon (SIH) 2026**
 
 ---
 
@@ -31,7 +31,7 @@ To build a **conversational assistant**, strictly grounded in official BIS/India
 * Supporting multilingual interaction
 * Citing sources/clauses for every answer
 
-This is a **team project** developed for SIH 2026 by Team Manak Mitra.
+This is a **team project** developed for SIH 2026 by Team Bureau of Students.
 
 ---
 
@@ -230,9 +230,9 @@ http://127.0.0.1:8000/docs
 1. Vivek Ediga @Sparrowspidey (Team Lead)
 2. Reshmitha
 3. Mahima
-4. Joel Stephan
+4. Joyal Kumar
 5. Anil Kumar
-6. Joyal Kumar
+6. Joel Stephan
 
 ---
 
@@ -259,4 +259,4 @@ Proprietary / All Rights Reserved
 
 ---
 
-> **BIS_Assist** — Built for Smart India Hackathon 2026, PS 26107.
+> **BIS_Assist** — Built for Smart India Hackathon 2026.
